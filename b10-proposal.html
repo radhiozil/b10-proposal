@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal: Nissan Almera N18 vs Leapmotor B10 Life</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-amber: #f59e0b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --danger-red: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa 0%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        /* Pure CSS Tab Radio Inputs (Hidden) */
+        .tab-radio {
+            display: none;
+        }
+
+        /* Hero Financial Summary Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(15,23,42,0.9) 100%);
+            border: 1px solid var(--accent-green);
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1);
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-stat .value {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .hero-stat .value.highlight {
+            color: var(--accent-green);
+        }
+
+        .hero-stat .subtext {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Tabs Styling */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            border-color: #475569;
+        }
+
+        /* Active Tab Styling via CSS Selectors */
+        #tab1:checked ~ .tabs label[for="tab1"],
+        #tab2:checked ~ .tabs label[for="tab2"],
+        #tab3:checked ~ .tabs label[for="tab3"],
+        #tab4:checked ~ .tabs label[for="tab4"] {
+            background: var(--accent-blue);
+            color: #ffffff;
+            border-color: var(--accent-blue);
+        }
+
+        /* Tab Content Switching Logic (Zero JS) */
+        .tab-content {
+            display: none;
+        }
+
+        #tab1:checked ~ #content1,
+        #tab2:checked ~ #content2,
+        #tab3:checked ~ #content3,
+        #tab4:checked ~ #content4 {
+            display: block;
+        }
+
+        /* Layout & Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .badge {
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-ice { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+        .badge-ev { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        th, td {
+            padding: 0.65rem 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        td.number {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .total-row td {
+            font-weight: 800;
+            border-top: 2px solid var(--card-border);
+            color: var(--accent-green);
+            font-size: 0.95rem;
+        }
+
+        /* Energy Bars */
+        .energy-mix {
+            margin-top: 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .energy-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .energy-item:last-child { margin-bottom: 0; }
+
+        .bar-container {
+            width: 100%;
+            background: #334155;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .bar-segment { height: 100%; }
+
+        /* Takeaway Box */
+        .takeaway-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .takeaway-box h4 {
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .takeaway-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .takeaway-box li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+        }
+
+        .takeaway-box li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #34d399;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Radio Controls for pure CSS tab navigation -->
+    <input type="radio" id="tab1" name="nav-tabs" class="tab-radio" checked>
+    <input type="radio" id="tab2" name="nav-tabs" class="tab-radio">
+    <input type="radio" id="tab3" name="nav-tabs" class="tab-radio">
+    <input type="radio" id="tab4" name="nav-tabs" class="tab-radio">
+
+    <header>
+        <h1>Vehicle Upgrade Financial Analysis</h1>
+        <p>Comparative Study: Nissan Almera N18 vs. Leapmotor B10 Life EV</p>
+    </header>
+
+    <!-- Executive Summary Banner -->
+    <div class="hero-banner">
+        <div class="hero-stat">
+            <div class="label">Almera Monthly Total</div>
+            <div class="value">RM 1,292</div>
+            <div class="subtext">Loan + Fuel + Maint + Tax</div>
+        </div>
+        <div class="hero-stat">
+            <div class="label">B10 Life Monthly Total</div>
+            <div class="value highlight">RM 1,368</div>
+            <div class="subtext">Loan + Energy + Maint + Tax</div>
+        </div>
+        <div class="hero-stat">
+            <div class="label">Net Outflow Difference</div>
+            <div class="value" style="color: var(--accent-amber);">+ RM 76 / mo</div>
+            <div class="subtext">Actual out-of-pocket increment</div>
+        </div>
+        <div class="hero-stat">
+            <div class="label">Fuel Savings Offset</div>
+            <div class="value highlight">~RM 145 / mo</div>
+            <div class="subtext">Petrol vs. Mixed EV Charging</div>
+        </div>
+    </div>
+
+    <!-- Navigation Labels (Clicking these triggers radio inputs above) -->
+    <div class="tabs">
+        <label for="tab1" class="tab-btn">📊 Monthly Breakdown</label>
+        <label for="tab2" class="tab-btn">⚡ Fuel vs. Charging Cost</label>
+        <label for="tab3" class="tab-btn">🛠️ Maintenance Schedule</label>
+        <label for="tab4" class="tab-btn">⏱️ Workplace Strategy</label>
+    </div>
+
+    <!-- TAB 1: MONTHLY BREAKDOWN -->
+    <div id="content1" class="tab-content">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Nissan Almera N18</span>
+                    <span class="badge badge-ice">Current ICE</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Expense Category</th><th class="number">Monthly Avg</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Monthly Bank Loan</td><td class="number">RM 837.00</td></tr>
+                        <tr><td>Petrol RON95 (Avg. RM225/mo)</td><td class="number">RM 225.00</td></tr>
+                        <tr><td>Periodic Maintenance (112k-175k km)</td><td class="number">RM 134.15</td></tr>
+                        <tr><td>Road Tax & Insurance (RM 1,150.67/yr)</td><td class="number">RM 95.89</td></tr>
+                        <tr class="total-row">
+                            <td>Total Running Outflow</td>
+                            <td class="number">RM 1,292.04</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Leapmotor B10 Life</span>
+                    <span class="badge badge-ev">Proposed EV</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Expense Category</th><th class="number">Monthly Avg</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Monthly Bank Loan (9 Years)</td><td class="number">RM 1,117.00</td></tr>
+                        <tr><td>EV Charging (Mixed Profile)</td><td class="number">RM 80.00</td></tr>
+                        <tr><td>Periodic Maintenance (20k-160k km)</td><td class="number">RM 78.07</td></tr>
+                        <tr><td>Road Tax & Insurance (Est. Equivalent)</td><td class="number">RM 93.00</td></tr>
+                        <tr class="total-row">
+                            <td>Total Running Outflow</td>
+                            <td class="number">RM 1,368.07</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="takeaway-box">
+            <h4>💡 Executive Summary</h4>
+            <ul>
+                <li><strong>Minimal Cash Flow Impact:</strong> Upgrading to a new C-segment EV SUV increases true monthly expenditure by only <strong>~RM 76.03</strong>.</li>
+                <li><strong>Loan Increase vs. Operating Savings:</strong> The higher loan (+RM 280.00) is 73% neutralized by monthly savings in petrol (-RM 145) and lower maintenance costs (-RM 56).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 2: ENERGY COST ANALYSIS -->
+    <div id="content2" class="tab-content">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Petrol Costs (Almera N18)</span>
+                    <span class="badge badge-ice">RON95</span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1rem;">
+                    Based on daily commuting and standard usage (~1,600 - 1,700 km / month).
+                </p>
+                <table>
+                    <tbody>
+                        <tr><td>Lower Bound Estimate</td><td class="number">RM 200.00 / mo</td></tr>
+                        <tr><td>Upper Bound Estimate</td><td class="number">RM 250.00 / mo</td></tr>
+                        <tr class="total-row">
+                            <td>Expected Average Fuel Outflow</td>
+                            <td class="number" style="color: var(--danger-red);">RM 225.00 / mo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">EV Charging Profile (B10 Life)</span>
+                    <span class="badge badge-ev">56.2 kWh LFP</span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 0.5rem;">
+                    Realistic charging mix (~250 kWh monthly demand):
+                </p>
+                <div class="energy-mix">
+                    <div class="energy-item">
+                        <span>🏢 Office AC Charger (RM0.28/kWh) — 65%</span>
+                        <strong style="color:#34d399;">~RM 45.50</strong>
+                    </div>
+                    <div class="energy-item">
+                        <span>🏠 Home 7kW AC Charger — 25%</span>
+                        <strong style="color:#60a5fa;">~RM 22.50</strong>
+                    </div>
+                    <div class="energy-item">
+                        <span>⚡ Public Fast DC Charger — 10%</span>
+                        <strong style="color:#f59e0b;">~RM 12.00</strong>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-segment" style="width: 65%; background: #10b981;"></div>
+                        <div class="bar-segment" style="width: 25%; background: #3b82f6;"></div>
+                        <div class="bar-segment" style="width: 10%; background: #f59e0b;"></div>
+                    </div>
+                </div>
+                <table style="margin-top: 1rem;">
+                    <tbody>
+                        <tr class="total-row">
+                            <td>Estimated Monthly Energy Outflow</td>
+                            <td class="number">RM 80.00 / mo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="takeaway-box">
+            <h4>⛽ Energy Savings Insight</h4>
+            <ul>
+                <li><strong>RM 1,740 Annual Energy Savings:</strong> Switching from petrol (RM 225/mo) to an optimized charging profile (RM 80/mo) saves ~RM 145 every single month.</li>
+                <li><strong>Workplace Advantage:</strong> Securing workplace AC charging at RM 0.28/kWh acts as the core catalyst driving down overall cost per kilometer.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 3: MAINTENANCE SCHEDULE -->
+    <div id="content3" class="tab-content">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Nissan Almera Maintenance</span>
+                    <span class="badge badge-ice">112k km – 175k km</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Service Interval</th><th class="number">Cost (RM)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>112,000 km</td><td class="number">RM 854.20</td></tr>
+                        <tr><td>119,000 km / 126,000 km</td><td class="number">RM 795.60</td></tr>
+                        <tr><td>133,000 km / 140,000 km</td><td class="number">RM 996.50</td></tr>
+                        <tr><td>147,000 km / 154,000 km</td><td class="number">RM 795.60</td></tr>
+                        <tr><td>161,000 km / 168,000 km</td><td class="number">RM 1,856.00</td></tr>
+                        <tr><td>175,000 km</td><td class="number">RM 336.30</td></tr>
+                        <tr class="total-row">
+                            <td>Total Maintenance (63,000 km)</td>
+                            <td class="number">RM 5,634.20</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-secondary);">
+                    • Average per service (~7,000 km): <strong>RM 563.42</strong><br>
+                    • Annual Cost (~20,000 km/yr): <strong>~RM 1,609.77 / yr</strong> (RM 134.15/mo)
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Leapmotor B10 Maintenance</span>
+                    <span class="badge badge-ev">20k km – 160k km</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Service Interval (1x/Yr)</th><th class="number">Cost (RM)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>20,000 km / Year 1</td><td class="number">RM 376.00</td></tr>
+                        <tr><td>40,000 km / Year 2</td><td class="number">RM 1,248.00</td></tr>
+                        <tr><td>60,000 km / Year 3</td><td class="number">RM 875.00</td></tr>
+                        <tr><td>80,000 km / Year 4</td><td class="number">RM 1,248.00</td></tr>
+                        <tr><td>100,000 km / Year 5</td><td class="number">RM 376.00</td></tr>
+                        <tr><td>120,000 km / Year 6</td><td class="number">RM 1,748.00</td></tr>
+                        <tr><td>140,000 km / Year 7</td><td class="number">RM 376.00</td></tr>
+                        <tr><td>160,000 km / Year 8</td><td class="number">RM 1,248.00</td></tr>
+                        <tr class="total-row">
+                            <td>Total 8-Year Maintenance</td>
+                            <td class="number">RM 7,495.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-secondary);">
+                    • Service Frequency: <strong>1x per year</strong> (or every 20,000 km)<br>
+                    • Average Annual Maintenance: <strong>RM 936.88 / yr</strong> (RM 78.07/mo)
+                </p>
+            </div>
+        </div>
+
+        <div class="takeaway-box">
+            <h4>🔧 Service & Time Efficiency Comparison</h4>
+            <ul>
+                <li><strong>66% Fewer Service Visits:</strong> The Almera requires ~3 service visits per year (~every 7,000 km), whereas the B10 Life requires only 1 annual visit (every 20,000 km).</li>
+                <li><strong>RM 672 Annual Servicing Savings:</strong> Save ~RM 56.08/month on servicing costs alone while eliminating frequent trips to workshop.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 4: WORKPLACE CHARGING STRATEGY -->
+    <div id="content4" class="tab-content">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Empirical Workplace Charging Strategy (5-Port Area)</span>
+                <span class="badge badge-ev">Optimized Routine</span>
+            </div>
+            <div class="grid-2" style="margin-top: 1rem;">
+                <div>
+                    <h4 style="color: var(--accent-blue); margin-bottom: 0.75rem;">🎯 Actionable Daily Windows</h4>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
+                        <li><strong style="color: var(--text-primary);">Morning Window (8:00 AM – 8:30 AM):</strong> Early arrival sweep to secure unreserved slots before 8:30 AM lockdown.</li>
+                        <li><strong style="color: var(--text-primary);">Lunch Window (11:45 AM – 12:15 PM):</strong> Primary target turnover window. Morning chargers unplug right around 11:45 AM - 12:00 PM (up to 3/5 ports open).</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-green); margin-bottom: 0.75rem;">⏱️ Lunch Turnover Plan</h4>
+                    <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
+                        <li><strong>11:35 AM:</strong> Leave desk (5-10 min walk to chargers).</li>
+                        <li><strong>11:45 AM:</strong> Arrive as first morning wave unplugs.</li>
+                        <li><strong>12:00 PM:</strong> Clean sweep & plug in prior to 12:10 PM rush.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="takeaway-box">
+            <h4>🔒 Zero Risk & Zero Capital Waste</h4>
+            <ul>
+                <li><strong>No Upfront Wallbox Required:</strong> Zero wallbox installation expenditure (RM 0 upfront cost) by utilizing workplace AC charging and 3-pin portable home charging.</li>
+                <li><strong>Predictable Execution:</strong> Structured timing eliminates random checks and seamlessly integrates charging into standard daily routines.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
