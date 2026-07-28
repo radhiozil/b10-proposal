@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leapmotor B10 - Charging Strategy Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Top Metrics Row */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .metric-card.highlight {
+            border-color: var(--accent-green);
+            background: linear-gradient(180deg, rgba(16,185,129,0.1) 0%, rgba(30,41,59,1) 100%);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .metric-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 0.2rem 0;
+            color: var(--text-main);
+        }
+
+        .metric-card.highlight .metric-value {
+            color: var(--accent-green);
+        }
+
+        .metric-sub {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+        }
+
+        /* Input Controls */
+        .config-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* Sliders Section */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-pill {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .pill-valid { background: rgba(16,185,129,0.2); color: var(--accent-green); }
+        .pill-invalid { background: rgba(239,68,68,0.2); color: #ef4444; }
+
+        .slider-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .charger-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .charger-rate {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+
+        .slider-value {
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;
+            background: #334155;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .slider-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            margin-top: 0.4rem;
+        }
+
+        /* Progress Bar */
+        .progress-bar-wrap {
+            height: 12px;
+            background: #334155;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-seg {
+            height: 100%;
+            transition: width 0.2s ease;
+        }
+
+        @media (max-width: 600px) {
+            .config-grid { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>EV Charging Mix Simulator</h1>
+        <p>Leapmotor B10 Life • Customize your monthly charging split</p>
+    </header>
+
+    <!-- Global Parameters -->
+    <div class="config-card">
+        <div class="config-grid">
+            <div class="input-group">
+                <label>Monthly Distance (km)</label>
+                <input type="number" id="distance" value="1500" step="50" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Efficiency (kWh / 100km)</label>
+                <input type="number" id="efficiency" value="14.5" step="0.5" oninput="calculate()">
+            </div>
+        </div>
+    </div>
+
+    <!-- Output Dashboard -->
+    <div class="metrics-grid">
+        <div class="metric-card highlight">
+            <div class="metric-label">Monthly Cost</div>
+            <div class="metric-value" id="totalCost">RM 0.00</div>
+            <div class="metric-sub" id="energyNeeded">0 kWh / month</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Effective Rate</div>
+            <div class="metric-value" id="effectiveRate">RM 0.00</div>
+            <div class="metric-sub">Average per kWh</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Monthly Savings</div>
+            <div class="metric-value" style="color: var(--accent-green);" id="petrolSavings">RM 0.00</div>
+            <div class="metric-sub">vs RM 225 Petrol</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Total Time Plugged In</div>
+            <div class="metric-value" id="totalHours">0 hrs</div>
+            <div class="metric-sub">Across all chargers</div>
+        </div>
+    </div>
+
+    <!-- Visual Breakdown Bar -->
+    <div class="progress-bar-wrap">
+        <div class="progress-seg" id="bar1" style="background: var(--accent-orange); width: 0%;"></div>
+        <div class="progress-seg" id="bar2" style="background: var(--accent-purple); width: 0%;"></div>
+        <div class="progress-seg" id="bar3" style="background: var(--accent-blue); width: 0%;"></div>
+        <div class="progress-seg" id="bar4" style="background: var(--accent-green); width: 0%;"></div>
+    </div>
+
+    <div class="section-title">
+        <span>Charging Mix Allocation</span>
+        <span id="totalPill" class="total-pill pill-valid">Total: 100%</span>
+    </div>
+
+    <!-- Slider 1: 3.7 kW Granny -->
+    <div class="slider-card">
+        <div class="slider-header">
+            <div class="charger-name">
+                <span class="dot" style="background: var(--accent-orange);"></span>
+                1. Home 3.7 kW Granny Charger
+            </div>
+            <div class="slider-value" id="val1">0%</div>
+        </div>
+        <input type="range" id="slide1" min="0" max="100" value="15" oninput="updateSliders(1)">
+        <div class="slider-stats">
+            <span>Rate: RM 0.38 / kWh</span>
+            <span id="stat1">0 kWh • 0 hrs</span>
+        </div>
+    </div>
+
+    <!-- Slider 2: 7.7 kW Wallbox -->
+    <div class="slider-card">
+        <div class="slider-header">
+            <div class="charger-name">
+                <span class="dot" style="background: var(--accent-purple);"></span>
+                2. Home 7.7 kW Wallbox
+            </div>
+            <div class="slider-value" id="val2">0%</div>
+        </div>
+        <input type="range" id="slide2" min="0" max="100" value="10" oninput="updateSliders(2)">
+        <div class="slider-stats">
+            <span>Rate: RM 0.38 / kWh</span>
+            <span id="stat2">0 kWh • 0 hrs</span>
+        </div>
+    </div>
+
+    <!-- Slider 3: 11 kW Office -->
+    <div class="slider-card">
+        <div class="slider-header">
+            <div class="charger-name">
+                <span class="dot" style="background: var(--accent-blue);"></span>
+                3. Office 11 kW AC Charger
+            </div>
+            <div class="slider-value" id="val3">0%</div>
+        </div>
+        <input type="range" id="slide3" min="0" max="100" value="65" oninput="updateSliders(3)">
+        <div class="slider-stats">
+            <span>Rate: RM 0.28 / kWh</span>
+            <span id="stat3">0 kWh • 0 hrs</span>
+        </div>
+    </div>
+
+    <!-- Slider 4: DC Charging -->
+    <div class="slider-card">
+        <div class="slider-header">
+            <div class="charger-name">
+                <span class="dot" style="background: var(--accent-green);"></span>
+                4. DC Public Fast Charger (Roadtrip/On the road)
+            </div>
+            <div class="slider-value" id="val4">0%</div>
+        </div>
+        <input type="range" id="slide4" min="0" max="100" value="10" oninput="updateSliders(4)">
+        <div class="slider-stats">
+            <span>Rate: RM 1.40 / kWh (60 kW DC)</span>
+            <span id="stat4">0 kWh • 0 hrs</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Rates & Powers
+    const chargers = [
+        { rate: 0.38, power: 3.7 },  // 1. Granny
+        { rate: 0.38, power: 7.7 },  // 2. Wallbox
+        { rate: 0.28, power: 11.0 }, // 3. Office
+        { rate: 1.40, power: 60.0 }  // 4. DC Fast
+    ];
+
+    function updateSliders(changedIndex) {
+        let s = [
+            parseInt(document.getElementById('slide1').value),
+            parseInt(document.getElementById('slide2').value),
+            parseInt(document.getElementById('slide3').value),
+            parseInt(document.getElementById('slide4').value)
+        ];
+
+        calculate();
+    }
+
+    function calculate() {
+        const dist = parseFloat(document.getElementById('distance').value) || 0;
+        const eff = parseFloat(document.getElementById('efficiency').value) || 0;
+
+        const p = [
+            parseInt(document.getElementById('slide1').value),
+            parseInt(document.getElementById('slide2').value),
+            parseInt(document.getElementById('slide3').value),
+            parseInt(document.getElementById('slide4').value)
+        ];
+
+        const totalPct = p.reduce((a, b) => a + b, 0);
+
+        // Update Pill Status
+        const pill = document.getElementById('totalPill');
+        pill.innerText = `Total: ${totalPct}%`;
+        if (totalPct === 100) {
+            pill.className = "total-pill pill-valid";
+        } else {
+            pill.className = "total-pill pill-invalid";
+        }
+
+        // Update Percentage Labels & Progress Bars
+        for (let i = 0; i < 4; i++) {
+            document.getElementById(`val${i+1}`).innerText = `${p[i]}%`;
+            document.getElementById(`bar${i+1}`).style.width = `${(p[i] / (totalPct || 1)) * 100}%`;
+        }
+
+        // Energy required (kWh)
+        const totalKWh = (dist / 100) * eff;
+        document.getElementById('energyNeeded').innerText = `${totalKWh.toFixed(1)} kWh / month`;
+
+        let totalCost = 0;
+        let totalHours = 0;
+
+        for (let i = 0; i < 4; i++) {
+            const segKWh = totalKWh * (p[i] / 100);
+            const segCost = segKWh * chargers[i].rate;
+            const segHours = segKWh / chargers[i].power;
+
+            totalCost += segCost;
+            totalHours += segHours;
+
+            document.getElementById(`stat${i+1}`).innerText = `${segKWh.toFixed(1)} kWh • ${segHours.toFixed(1)} hrs`;
+        }
+
+        const avgRate = totalKWh > 0 ? (totalCost / totalKWh) : 0;
+        const petrolCost = 225.00; // Almera benchmark
+        const savings = petrolCost - totalCost;
+
+        // Render Outputs
+        document.getElementById('totalCost').innerText = `RM ${totalCost.toFixed(2)}`;
+        document.getElementById('effectiveRate').innerText = `RM ${avgRate.toFixed(2)}`;
+        document.getElementById('petrolSavings').innerText = savings >= 0 ? `+RM ${savings.toFixed(2)}` : `-RM ${Math.abs(savings).toFixed(2)}`;
+        document.getElementById('totalHours').innerText = `${Math.round(totalHours)} hrs`;
+    }
+
+    // Initial calculation on page load
+    calculate();
+</script>
+
+</body>
+</html>
