@@ -58,7 +58,12 @@
             margin-top: 0.3rem;
         }
 
-        /* Navigation Tabs */
+        /* Hide CSS Radio inputs completely */
+        .tab-radio {
+            display: none !important;
+        }
+
+        /* Navigation Bar Labels */
         .nav-tabs {
             display: flex;
             gap: 0.5rem;
@@ -83,19 +88,33 @@
             transition: all 0.2s ease;
             white-space: nowrap;
             text-align: center;
+            user-select: none;
         }
 
-        .tab-btn.active {
+        .tab-btn:hover {
+            color: var(--text-main);
+        }
+
+        /* Pure CSS Active Tab Styling */
+        #radio-summary:checked ~ .nav-tabs label[for="radio-summary"],
+        #radio-financials:checked ~ .nav-tabs label[for="radio-financials"],
+        #radio-simulator:checked ~ .nav-tabs label[for="radio-simulator"],
+        #radio-maintenance:checked ~ .nav-tabs label[for="radio-maintenance"] {
             background: var(--accent-blue);
             color: #ffffff;
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
+        /* Hide all tab contents by default */
         .tab-content {
             display: none;
         }
 
-        .tab-content.active {
+        /* Show corresponding tab content natively via CSS */
+        #radio-summary:checked ~ #panel-summary,
+        #radio-financials:checked ~ #panel-financials,
+        #radio-simulator:checked ~ #panel-simulator,
+        #radio-maintenance:checked ~ #panel-maintenance {
             display: block;
         }
 
@@ -392,19 +411,25 @@
 <div class="container">
     <header>
         <h1>Vehicle Upgrade & EV Strategy Proposal</h1>
-        <p>Nissan Almera N18 $\rightarrow$ Leapmotor B10 Life EV</p>
+        <p>Nissan Almera N18 &rarr; Leapmotor B10 Life EV</p>
     </header>
 
-    <!-- Navigation Bar -->
+    <!-- Hidden Radio Inputs for Pure CSS Tab Navigation -->
+    <input type="radio" id="radio-summary" name="tab-group" class="tab-radio" checked>
+    <input type="radio" id="radio-financials" name="tab-group" class="tab-radio">
+    <input type="radio" id="radio-simulator" name="tab-group" class="tab-radio">
+    <input type="radio" id="radio-maintenance" name="tab-group" class="tab-radio">
+
+    <!-- Navigation Bar Labels -->
     <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('summary', this)">📊 Executive Summary</button>
-        <button class="tab-btn" onclick="switchTab('financials', this)">💵 Financial Breakdown</button>
-        <button class="tab-btn" onclick="switchTab('simulator', this)">⚡ Charging Simulator</button>
-        <button class="tab-btn" onclick="switchTab('maintenance', this)">🛠️ Servicing</button>
+        <label for="radio-summary" class="tab-btn">📊 Executive Summary</label>
+        <label for="radio-financials" class="tab-btn">💵 Financial Breakdown</label>
+        <label for="radio-simulator" class="tab-btn">⚡ Charging Simulator</label>
+        <label for="radio-maintenance" class="tab-btn">🛠️ Servicing</label>
     </nav>
 
     <!-- TAB 1: EXECUTIVE SUMMARY -->
-    <div id="tab-summary" class="tab-content active">
+    <div id="panel-summary" class="tab-content">
         <div class="metrics-grid">
             <div class="metric-card">
                 <div class="metric-label">Almera Monthly</div>
@@ -440,7 +465,7 @@
     </div>
 
     <!-- TAB 2: FINANCIAL BREAKDOWN -->
-    <div id="tab-financials" class="tab-content">
+    <div id="panel-financials" class="tab-content">
         <div class="tables-grid">
             <!-- Almera N18 -->
             <div class="table-card">
@@ -491,7 +516,7 @@
     </div>
 
     <!-- TAB 3: CHARGING SIMULATOR -->
-    <div id="tab-simulator" class="tab-content">
+    <div id="panel-simulator" class="tab-content">
         <div class="config-card">
             <div class="config-grid">
                 <div class="input-group">
@@ -562,31 +587,4 @@
                     <span class="dot" style="background: var(--accent-purple);"></span>
                     2. Home 7.7 kW Wallbox
                 </div>
-                <div class="slider-value" id="val2">10%</div>
-            </div>
-            <input type="range" id="slide2" min="0" max="100" value="10" oninput="calculate()">
-            <div class="slider-stats">
-                <span>Rate: RM 0.38 / kWh</span>
-                <span id="stat2">0 kWh • 0 hrs</span>
-            </div>
-        </div>
-
-        <div class="slider-card">
-            <div class="slider-header">
-                <div class="charger-name">
-                    <span class="dot" style="background: var(--accent-blue);"></span>
-                    3. Office 11 kW AC Charger
-                </div>
-                <div class="slider-value" id="val3">65%</div>
-            </div>
-            <input type="range" id="slide3" min="0" max="100" value="65" oninput="calculate()">
-            <div class="slider-stats">
-                <span>Rate: RM 0.28 / kWh</span>
-                <span id="stat3">0 kWh • 0 hrs</span>
-            </div>
-        </div>
-
-        <div class="slider-card">
-            <div class="slider-header">
-                <div class="charger-name">
-                    <span class="dot" style="background: var(--accent-green);"></span>
+                <div class="slider-value" id="v
