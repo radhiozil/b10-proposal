@@ -397,10 +397,10 @@
 
     <!-- Navigation Bar -->
     <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('summary')">📊 Executive Summary</button>
-        <button class="tab-btn" onclick="switchTab('financials')">💵 Financial Breakdown</button>
-        <button class="tab-btn" onclick="switchTab('simulator')">⚡ Charging Simulator</button>
-        <button class="tab-btn" onclick="switchTab('maintenance')">🛠️ Servicing</button>
+        <button class="tab-btn active" onclick="switchTab('summary', this)">📊 Executive Summary</button>
+        <button class="tab-btn" onclick="switchTab('financials', this)">💵 Financial Breakdown</button>
+        <button class="tab-btn" onclick="switchTab('simulator', this)">⚡ Charging Simulator</button>
+        <button class="tab-btn" onclick="switchTab('maintenance', this)">🛠️ Servicing</button>
     </nav>
 
     <!-- TAB 1: EXECUTIVE SUMMARY -->
@@ -477,7 +477,7 @@
                     </thead>
                     <tbody>
                         <tr><td>Monthly Loan (9 Years)</td><td class="number">RM 1,117.00</td></tr>
-                        <tr><td>Energy Cost (65% Off / 25% Home / 10% DC)</td><td class="number">RM 80.00</td></tr>
+                        <tr><td>Energy Cost (65% Office / 25% Home / 10% DC)</td><td class="number">RM 80.00</td></tr>
                         <tr><td>Maintenance (20k-160k km avg)</td><td class="number">RM 78.07</td></tr>
                         <tr><td>Insurance & Road Tax (Est.)</td><td class="number">RM 93.00</td></tr>
                         <tr class="total-row">
@@ -590,4 +590,3 @@
             <div class="slider-header">
                 <div class="charger-name">
                     <span class="dot" style="background: var(--accent-green);"></span>
-                    4. DC Public Fast Ch
