@@ -327,6 +327,569 @@
         </div>
         <div class="hero-stat">
             <div class="label">B10 Life Monthly Total</div>
+            <div class="value highlight">RM 1,374</div>
+            <div class="subtext">Loan + Energy + Maint + Tax</div>
+        </div>
+        <div class="hero-stat">
+            <div class="label">Net Outflow Difference</div>
+            <div class="value" style="color: var(--accent-amber);">+ RM 57 / mo</div>
+            <div class="subtext">Actual out-of-pocket increment</div>
+        </div>
+        <div class="hero-stat">
+            <div class="label">Fuel Savings Offset</div>
+            <div class="value highlight">RM 125 / mo</div>
+            <div class="subtext">Petrol vs. Mixed EV Charging</div>
+        </div>
+    </div>
+
+    <!-- Navigation Tab Labels (Clickable without JavaScript) -->
+    <div class="tabs">
+        <label for="tab-summary" class="tab-btn">📊 Monthly Breakdown</label>
+        <label for="tab-energy" class="tab-btn">⚡ Fuel vs. Charging Cost</label>
+        <label for="tab-maintenance" class="tab-btn">🛠️ Maintenance Schedule</label>
+        <label for="tab-strategy" class="tab-btn">⏱️ Workplace Strategy</label>
+    </div>
+
+    <!-- TAB 1: MONTHLY BREAKDOWN -->
+    <div id="summary" class="tab-content">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Nissan Almera N18</span>
+                    <span class="badge badge-ice">Current ICE</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Expense Category</th><th class="number">Monthly Avg</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Monthly Bank Loan</td><td class="number">RM 837.00</td></tr>
+                        <tr><td>Petrol RON95 (Avg. 1,800km/mo)</td><td class="number">RM 250.00</td></tr>
+                        <tr><td>Periodic Maintenance (112k-175k km)</td><td class="number">RM 134.15</td></tr>
+                        <tr><td>Road Tax & Insurance (RM 1,150.67/yr)</td><td class="number">RM 95.89</td></tr>
+                        <tr class="total-row">
+                            <td>Total Scheduled Outflow</td>
+                            <td class="number">RM 1,317.04</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Leapmotor B10 Life</span>
+                    <span class="badge badge-ev">Proposed EV</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Expense Category</th><th class="number">Monthly Avg</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Monthly Bank Loan</td><td class="number">RM 971.00</td></tr>
+                        <tr><td>EV Charging (1,800km Mixed Profile)</td><td class="number">RM 125.00</td></tr>
+                        <tr><td>Periodic Maintenance (3Yrs / 60k km)</td><td class="number">RM 69.42</td></tr>
+                        <tr><td>Road Tax & Insurance Renewal (RM 2,500/yr)</td><td class="number">RM 208.33</td></tr>
+                        <tr class="total-row">
+                            <td>Total Scheduled Outflow</td>
+                            <td class="number">RM 1,373.75</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="takeaway-box">
+            <h4>💡 Executive Summary</h4>
+            <ul>
+                <li><strong>Minimal Cash Flow Delta:</strong> Upgrading to a new C-segment EV SUV increases scheduled monthly commitment by only <strong>~RM 56.71 / month</strong>.</li>
+                <li><strong>Loan Difference Fully Neutralized:</strong> The loan increase (+RM 134.00) is almost entirely offset by monthly petrol savings (-RM 125.00) and lower servicing costs (-RM 64.73).</li>
+                <li><strong>True Cost Reversal (Repair Risk Included):</strong> Holding the aging Almera requires stashing an emergency buffer of <strong>RM 150 – RM 200/mo</strong> against out-of-warranty repairs (e.g., 98k km incident). Adding this buffer raises the Almera's real cost to <strong>RM 1,467 – RM 1,517/mo</strong>—making the Leapmotor B10 <u>cheaper overall</u> while protecting your core savings ("korek").</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 2: ENERGY COST ANALYSIS -->
+    <div id="energy" class="tab-content">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Petrol Costs (Almera N18)</span>
+                    <span class="badge badge-ice">RON95</span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1rem;">
+                    Based on standard commute distance of ~1,800 km / month.
+                </p>
+                <table>
+                    <tbody>
+                        <tr><td>Monthly Travel Distance</td><td class="number">1,800 km</td></tr>
+                        <tr><td>Fuel Consumption Rate</td><td class="number">~6.8 L / 100 km</td></tr>
+                        <tr class="total-row">
+                            <td>Expected Average Fuel Outflow</td>
+                            <td class="number" style="color: var(--danger-red);">RM 250.00 / mo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">EV Charging Profile (B10 Life)</span>
+                    <span class="badge badge-ev">56.2 kWh LFP</span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 0.5rem;">
+                    Mixed charging demand for 1,800 km distance (~270 kWh required):
+                </p>
+                <div class="energy-mix">
+                    <div class="energy-item">
+                        <span>🏢 Office AC Charger (RM0.28/kWh) — 65%</span>
+                        <strong style="color:#34d399;">~RM 49.00</strong>
+                    </div>
+                    <div class="energy-item">
+                        <span>🏠 Home 7kW AC Charger — 25%</span>
+                        <strong style="color:#60a5fa;">~RM 38.00</strong>
+                    </div>
+                    <div class="energy-item">
+                        <span>⚡ Public Fast DC Charger — 10%</span>
+                        <strong style="color:#f59e0b;">~RM 38.00</strong>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-segment" style="width: 65%; background: #10b981;"></div>
+                        <div class="bar-segment" style="width: 25%; background: #3b82f6;"></div>
+                        <div class="bar-segment" style="width: 10%; background: #f59e0b;"></div>
+                    </div>
+                </div>
+                <table style="margin-top: 1rem;">
+                    <tbody>
+                        <tr class="total-row">
+                            <td>Estimated Monthly Energy Outflow</td>
+                            <td class="number">RM 125.00 / mo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="takeaway-box">
+            <h4>⛽ Energy Savings Insight</h4>
+            <ul>
+                <li><strong>RM 1,500 Annual Energy Savings:</strong> Cutting energy expenditure from RM 250/mo (petrol) to RM 125/mo (mixed charging) saves exactly RM 125 every single month.</li>
+                <li><strong>Workplace Advantage:</strong> Offloading 65% of charging to the workplace AC charger at RM 0.28/kWh keeps your operational cost per km extremely low at ~RM 0.069 / km.</li>
+                <li><strong>LFP 100% Top-Up Advantage:</strong> The B10's LFP battery pack can be charged to 100% routinely without chemical degradation, maximizing your cheap office electricity intake.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 3: MAINTENANCE SCHEDULE & REPAIR RISK -->
+    <div id="maintenance" class="tab-content">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Nissan Almera Maintenance</span>
+                    <span class="badge badge-ice">112k km – 175k km (~63k km)</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Service Interval</th><th class="number">Cost (RM)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>112,000 km</td><td class="number">RM 854.20</td></tr>
+                        <tr><td>119,000 km / 126,000 km</td><td class="number">RM 795.60</td></tr>
+                        <tr><td>133,000 km / 140,000 km</td><td class="number">RM 996.50</td></tr>
+                        <tr><td>147,000 km / 154,000 km</td><td class="number">RM 795.60</td></tr>
+                        <tr><td>161,000 km / 168,000 km</td><td class="number">RM 1,856.00</td></tr>
+                        <tr><td>175,000 km</td><td class="number">RM 336.30</td></tr>
+                        <tr class="total-row">
+                            <td>Total ~63k km Maintenance</td>
+                            <td class="number">RM 5,634.20</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-secondary);">
+                    • Average per service (~7,000 km): <strong>RM 563.42</strong><br>
+                    • 3-Year / 60k km Equivalent: <strong>~RM 1,609.77 / yr</strong> (RM 134.15/mo)
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Leapmotor B10 Maintenance</span>
+                    <span class="badge badge-ev">3 Yrs / 60,000 km</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Service Interval (1x/Yr)</th><th class="number">Cost (RM)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>20,000 km / Year 1</td><td class="number">RM 376.00</td></tr>
+                        <tr><td>40,000 km / Year 2</td><td class="number">RM 1,248.00</td></tr>
+                        <tr><td>60,000 km / Year 3</td><td class="number">RM 875.00</td></tr>
+                        <tr class="total-row">
+                            <td>Total 3-Year / 60k km Maintenance</td>
+                            <td class="number">RM 2,499.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-secondary);">
+                    • Service Frequency: <strong>1x per year</strong> (or every 20,000 km)<br>
+                    • 3-Year Average Maintenance: <strong>RM 833.00 / yr</strong> (RM 69.42/mo)
+                </p>
+            </div>
+        </div>
+
+        <!-- Unexpected Repair Risk Callout -->
+        <div class="card" style="margin-top: 1.5rem; border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.05);">
+            <div class="card-header" style="border-bottom-color: rgba(239, 68, 68, 0.2);">
+                <span class="card-title" style="color: #fca5a5;">⚠️ Out-of-Warranty ICE Repair Risk & Emergency Reserve Budgeting</span>
+                <span class="badge badge-ice">Financial Vulnerability</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 0.8rem;">
+                <strong>Historical Precedent (98,000 km Milestone):</strong> The Almera N18 experienced a sudden unexpected mechanical repair of <strong style="color: #ef4444;">RM 3,820.00</strong>. When combined with periodic maintenance, the single workshop bill skyrocketed to <strong style="color: #ef4444;">RM 4,393.00</strong>.
+            </p>
+            <ul class="list-style-custom" style="border-color: #ef4444;">
+                <li><strong>Personal Savings Impact:</strong> Unplanned spikes of ~RM 4,000 directly force you to "korek" personal savings or emergency funds if cash buffers aren't prepared in advance.</li>
+                <li><strong>True Cost to Retain Almera:</strong> To safely keep the Almera past 100,000 km without risking emergency cash reserves, a minimum buffer of <strong>RM 150.00 – RM 200.00/month</strong> must be set aside strictly for unexpected wear-and-tear failures.</li>
+                <li><strong>Effective Adjusted Monthly Running Cost:</strong> Adding this emergency repair buffer raises the Almera's true monthly financial commitment from <strong>RM 1,317.04</strong> to <strong>RM 1,467.00 – RM 1,517.00</strong>.</li>
+                <li><strong>EV Warranty Assurance:</strong> The Leapmotor B10 Life is backed by full manufacturer factory and high-voltage battery warranties, eliminating high-value unexpected repair bill risks during ownership.</li>
+            </ul>
+        </div>
+
+        <div class="takeaway-box">
+            <h4>🔧 Direct Baseline Maintenance Comparison (3 Yrs / ~60,000 km)</h4>
+            <ul>
+                <li><strong>RM 3,135 Maintenance Savings Over 3 Years:</strong> Comparing equal 60,000 km usage windows, the Almera requires <strong>RM 5,634.20</strong> vs. B10's <strong>RM 2,499.00</strong>, saving you ~RM 64.73/month.</li>
+                <li><strong>66% Fewer Service Visits:</strong> The Almera requires ~3 service visits per year (~every 7,000 km), whereas the B10 Life requires only 1 annual visit (every 20,000 km).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 4: WORKPLACE CHARGING STRATEGY -->
+    <div id="strategy" class="tab-content">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Office Infrastructure Setup</span>
+                    <span class="badge badge-ev">5-Port Hub</span>
+                </div>
+                <table>
+                    <tbody>
+                        <tr><td>Charging Infrastructure</td><td class="number">5 Dedicated AC Ports</td></tr>
+                        <tr><td>Workplace Subsidized Rate</td><td class="number" style="color: var(--accent-green);">RM 0.28 / kWh</td></tr>
+                        <tr><td>Target Monthly Demand</td><td class="number">~175 kWh (1,800km share)</td></tr>
+                        <tr><td>Battery Type & Target SOC</td><td class="number" style="color: var(--accent-green);">56.2 kWh LFP (100% Target)</td></tr>
+                        <tr class="total-row">
+                            <td>Target Monthly Expense</td>
+                            <td class="number">~RM 49.00 / mo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Daily Execution Windows</span>
+                    <span class="badge badge-ev">Time-Slot Plan</span>
+                </div>
+                <div class="energy-mix">
+                    <div class="energy-item">
+                        <span>🌅 <strong>Slot A: Morning (8:30 – 11:30 AM)</strong></span>
+                        <strong style="color:#34d399;">Primary (Replenish to 100%)</strong>
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.6rem;">
+                        Plug in upon arrival. 3-hour AC slot tops up ~20 kWh and recalibrates the BMS range readout.
+                    </p>
+
+                    <div class="energy-item">
+                        <span>☀️ <strong>Slot B: Midday (11:30 AM – 2:30 PM)</strong></span>
+                        <strong style="color:#60a5fa;">Secondary / Bay Swap</strong>
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.6rem;">
+                        Swap bays during lunch if morning slots were fully occupied by colleagues.
+                    </p>
+
+                    <div class="energy-item">
+                        <span>🌇 <strong>Slot C: Afternoon (2:30 – 5:30 PM)</strong></span>
+                        <strong style="color:#f59e0b;">Pre-Trip Top-up Slot</strong>
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary);">
+                        Convenient slot to reach a full 100% charge before long weekend outstation drives.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 1.5rem;">
+            <div class="card-header">
+                <span class="card-title">Weekly Routine & Fallback Contingency Matrix</span>
+                <span class="badge badge-ev">Operational Rules</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario / Event</th>
+                        <th>Action Plan</th>
+                        <th class="number">Impact on Routine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Standard Office Routine</strong></td>
+                        <td>Plug in 2 to 3 times a week to reach 100% SOC. Regular full charges keep LFP cell voltages balanced and range readouts accurate.</td>
+                        <td class="number" style="color: var(--accent-green);">Optimal BMS Health</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High Port Competition</strong></td>
+                        <td>Shift charging to Tuesday/Thursday when port occupancy drops. LFP holds charge well, so missing one day causes zero range anxiety.</td>
+                        <td class="number" style="color: var(--accent-amber);">High Flexibility</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Colleague Bay Sharing</strong></td>
+                        <td>Move car immediately once 100% target is reached or when a coworker needs the plug. Bay moves are strictly for workplace etiquette, not battery fears.</td>
+                        <td class="number">Good Etiquette</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td><strong>Long Weekend Travel</strong></td>
+                        <td>Top up to 100% on Thursday afternoon slot via cheap workplace AC power before departure.</td>
+                        <td class="number">Max Range Ready</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="takeaway-box">
+            <h4>⚡ Strategic Advantage of LFP 100% Workplace Charging</h4>
+            <ul>
+                <li><strong>No Battery Anxiety at 100%:</strong> Unlike NMC battery chemistry, LFP cells thrive on frequent 100% charges. It keeps the Battery Management System (BMS) accurately calibrated so range estimates stay precise.</li>
+                <li><strong>Significant Energy Cost Reduction:</strong> Maximizing 100% charges at the cheap RM 0.28/kWh workplace rate keeps your daily running costs down to ~RM 0.069 per km compared to ~RM 0.139 per km for RON95 petrol.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+                margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Style Tab Labels to look like Buttons */
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            border-color: #475569;
+        }
+
+        /* Pure CSS Active Tab Button Highlight */
+        #tab-summary:checked ~ .tabs label[for="tab-summary"],
+        #tab-energy:checked ~ .tabs label[for="tab-energy"],
+        #tab-maintenance:checked ~ .tabs label[for="tab-maintenance"],
+        #tab-strategy:checked ~ .tabs label[for="tab-strategy"] {
+            background: var(--accent-blue);
+            color: #ffffff;
+            border-color: var(--accent-blue);
+        }
+
+        /* Hide all Tab Contents by default */
+        .tab-content {
+            display: none;
+        }
+
+        /* Pure CSS Display Content when corresponding Radio is Checked */
+        #tab-summary:checked ~ #summary,
+        #tab-energy:checked ~ #energy,
+        #tab-maintenance:checked ~ #maintenance,
+        #tab-strategy:checked ~ #strategy {
+            display: block;
+        }
+
+        /* Card Content */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .badge {
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-ice { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+        .badge-ev { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        th, td {
+            padding: 0.65rem 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        td.number {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .total-row td {
+            font-weight: 800;
+            border-top: 2px solid var(--card-border);
+            color: var(--accent-green);
+            font-size: 0.95rem;
+        }
+
+        /* Fuel & Charging Profile Cards */
+        .energy-mix {
+            margin-top: 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .energy-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .energy-item:last-child { margin-bottom: 0; }
+
+        .bar-container {
+            width: 100%;
+            background: #334155;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .bar-segment { height: 100%; }
+
+        /* Key Highlights Box */
+        .takeaway-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .takeaway-box h4 {
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .takeaway-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .takeaway-box li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+        }
+
+        .takeaway-box li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #34d399;
+        }
+
+        .list-style-custom {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .list-style-custom li {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--accent-blue);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hidden Radio Inputs Driving Pure CSS Tabs -->
+    <input type="radio" id="tab-summary" name="tab-group" class="tab-radio" checked>
+    <input type="radio" id="tab-energy" name="tab-group" class="tab-radio">
+    <input type="radio" id="tab-maintenance" name="tab-group" class="tab-radio">
+    <input type="radio" id="tab-strategy" name="tab-group" class="tab-radio">
+
+    <header>
+        <h1>Vehicle Upgrade Financial Analysis</h1>
+        <p>Comparative Study: Nissan Almera N18 vs. Leapmotor B10 Life EV</p>
+    </header>
+
+    <!-- Executive KPI Banner -->
+    <div class="hero-banner">
+        <div class="hero-stat">
+            <div class="label">Almera Monthly Total</div>
+            <div class="value">RM 1,317</div>
+            <div class="subtext">Loan + Fuel + Maint + Tax</div>
+        </div>
+        <div class="hero-stat">
+            <div class="label">B10 Life Monthly Total</div>
             <div class="value highlight">RM 1,382</div>
             <div class="subtext">Loan + Energy + Maint + Tax</div>
         </div>
